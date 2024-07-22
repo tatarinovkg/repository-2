@@ -244,7 +244,7 @@
         });
 
         async function fetchClasses() {
-            const response = await fetch('http://tatarinovkg.github.io/repository-2/api/classes');
+            const response = await fetch('https://tatarinovkg.github.io/repository-2/api/classes');
             const classes = await response.json();
             const classesList = document.getElementById('classesList');
             classesList.innerHTML = '';
@@ -274,7 +274,7 @@
             searchInput.style.transition = 'border-color 0.3s'; // Плавный переход
 
             if (classID) {
-                fetch('http://tatarinovkg.github.io/repository-2/api/search', {
+                fetch('https://tatarinovkg.github.io/repository-2/api/search', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -309,7 +309,7 @@
         }
 
         function showDetails(classID) {
-            fetch('http://tatarinovkg.github.io/repository-2/api/search', {
+            fetch('https://tatarinovkg.github.io/repository-2/api/search', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

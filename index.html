@@ -235,7 +235,7 @@
     <script>
         async function fetchClasses() {
             try {
-                const response = await fetch('http://5957-5-1-51-111.ngrok-free.app/api/classes'); // Используем HTTP и правильный URL
+                const response = await fetch('https://5957-5-1-51-111.ngrok-free.app/api/classes'); // Используем HTTP и правильный URL
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
@@ -280,7 +280,7 @@
             searchInput.style.transition = 'border-color 0.3s'; // Плавный переход
 
             if (classID) {
-                fetch('http://5957-5-1-51-111.ngrok-free.app/api/search', {
+                fetch('https://5957-5-1-51-111.ngrok-free.app/api/search', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -315,7 +315,7 @@
         }
 
         function showDetails(classID) {
-            fetch('http://5957-5-1-51-111.ngrok-free.app/api/search', {
+            fetch('https://5957-5-1-51-111.ngrok-free.app/api/search', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

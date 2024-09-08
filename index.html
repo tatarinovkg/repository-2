@@ -246,7 +246,7 @@
 
         async function fetchClasses() {
             try {
-                const response = await fetch('https://tatarinovkg.pythonanywhere.com/api/classes', {
+                const response = await fetch('https://louse-precious-sincerely.ngrok-free.app/api/classes', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -293,7 +293,7 @@
             searchInput.style.transition = 'border-color 0.3s'; // Плавный переход
 
             if (classID) {
-                fetch('https://tatarinovkg.pythonanywhere.com/api/search', {
+                fetch('https://louse-precious-sincerely.ngrok-free.app/api/search', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -328,7 +328,7 @@
         }
 
         function showDetails(classID) {
-            fetch('https://tatarinovkg.pythonanywhere.com/api/search', {
+            fetch('https://louse-precious-sincerely.ngrok-free.app/api/search', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

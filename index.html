@@ -233,7 +233,6 @@
         }
     </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://unpkg.com/@tma.js/sdk/dist/tma.umd.min.js"></script>
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
@@ -394,14 +393,23 @@
             }
         }
 
-        function loadTelegramScript(callback) {
-            const script = document.createElement('script');
-            script.src = 'https://telegram.org/js/telegram-web-app.js';
-            script.onload = () => callback(true);  // Скрипт загрузился успешно
-            script.onerror = () => callback(false); // Ошибка загрузки скрипта
-            document.head.appendChild(script);
+        export function isTelegramWebApp() {
+            // @ts-ignore
+            return typeof TelegramWebviewProxy !== 'undefined';
         }
-    
+        
+        if (isTelegramWebApp()) {
+            console.log("User is using Telegram Web App or in-app browser.");
+            // Здесь можете продолжить инициализацию вашего приложения
+            fetchClasses();
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('keydown', handleEnter);
+        } else {
+            console.log("User is using a regular browser.");
+            displayError(); // Отобразить сообщение об ошибке
+        }
+        
+        // Функция для отображения ошибки
         function displayError() {
             document.body.innerHTML = `
                 <div style="text-align: center; margin-top: 50px;">
@@ -413,26 +421,6 @@
             document.body.style.backgroundColor = '#fff';
             document.body.style.color = '#333';
         }
-    
-        function initApp() {
-            if (typeof window.Telegram !== 'undefined' && typeof window.Telegram.WebApp !== 'undefined') {
-                fetchClasses();
-                const searchInput = document.getElementById('searchInput');
-                searchInput.addEventListener('keydown', handleEnter);
-            } else {
-                displayError();
-            }
-        }
-    
-        document.addEventListener('DOMContentLoaded', function() {
-            loadTelegramScript(function(isLoaded) {
-                if (isLoaded) {
-                    initApp(); // Если Telegram скрипт загрузился, выполняем приложение
-                } else {
-                    displayError(); // Если скрипт не загрузился, показываем ошибку
-                }
-            });
-        });
     </script>
 </head>
 <body>

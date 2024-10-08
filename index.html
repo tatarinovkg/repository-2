@@ -399,8 +399,14 @@
     
         document.addEventListener('DOMContentLoaded', function() {
             if (!isUserOnTelegram()) {
-                // Скрываем контент страницы
-                document.body.innerHTML = '<div style="text-align: center; margin-top: 50px;"><h2>Ошибка</h2><p>Откройте это приложение через Telegram для использования</p></div>';
+                // Скрываем контент страницы и выводим сообщение об ошибке
+                document.body.innerHTML = `
+                    <div style="text-align: center; margin-top: 50px;">
+                        <h2>Error</h2>
+                        <p>This web application is only accessible through the Telegram bot <a href="https://t.me/tatarinovkgBot" target="_blank">@tatarinovkgBot</a>.</p>
+                        <p>The bot helps students conveniently track homework, associated files, and important announcements.</p>
+                    </div>
+                `;
                 document.body.style.backgroundColor = '#fff';
                 document.body.style.color = '#333';
                 return;

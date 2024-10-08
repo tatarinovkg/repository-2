@@ -233,6 +233,7 @@
         }
     </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://unpkg.com/@tma.js/sdk/dist/tma.umd.min.js"></script>
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
@@ -393,14 +394,19 @@
             }
         }
 
-        function isUserOnTelegram() {
-            // Проверяем наличие объекта Telegram WebApp
-            return typeof window.Telegram !== 'undefined' && typeof window.Telegram.WebApp !== 'undefined';
-        }
+        async function checkTelegramEnvironment() {
+            let isTMA;
     
-        document.addEventListener('DOMContentLoaded', function() {
-            if (!isUserOnTelegram()) {
-                // Скрываем контент страницы и выводим сообщение об ошибке
+            try {
+                await tma.request('web_app_request_theme', 'theme_changed', {
+                    timeout: 100,
+                });
+                isTMA = true;
+            } catch {
+                isTMA = false;
+            }
+    
+            if (!isTMA) {
                 document.body.innerHTML = `
                     <div style="text-align: center; margin-top: 50px;">
                         <h2>Error</h2>
@@ -410,15 +416,14 @@
                 `;
                 document.body.style.backgroundColor = '#fff';
                 document.body.style.color = '#333';
-                return;
+            } else {
+                fetchClasses();
+                const searchInput = document.getElementById('searchInput');
+                searchInput.addEventListener('keydown', handleEnter);
             }
-            
-            // Если приложение открыто в Telegram, продолжить обычное выполнение
-            fetchClasses();
-            
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('keydown', handleEnter);
-        });
+        }
+    
+        document.addEventListener('DOMContentLoaded', checkTelegramEnvironment);
     </script>
 </head>
 <body>

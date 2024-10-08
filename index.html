@@ -394,7 +394,8 @@
         }
 
         function isUserOnTelegram() {
-            return navigator.userAgent.includes('Telegram');
+            // Проверяем наличие объекта Telegram WebApp
+            return typeof window.Telegram !== 'undefined' && typeof window.Telegram.WebApp !== 'undefined';
         }
     
         document.addEventListener('DOMContentLoaded', function() {

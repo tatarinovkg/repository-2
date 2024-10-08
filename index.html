@@ -393,10 +393,22 @@
             }
         }
 
+        function isUserOnTelegram() {
+            return navigator.userAgent.includes('Telegram');
+        }
+    
         document.addEventListener('DOMContentLoaded', function() {
+            if (!isUserOnTelegram()) {
+                // Скрываем контент страницы
+                document.body.innerHTML = '<div style="text-align: center; margin-top: 50px;"><h2>Ошибка</h2><p>Откройте это приложение через Telegram для использования</p></div>';
+                document.body.style.backgroundColor = '#fff';
+                document.body.style.color = '#333';
+                return;
+            }
+            
+            // Если приложение открыто в Telegram, продолжить обычное выполнение
             fetchClasses();
-
-            // Добавляем обработчик события keydown к полю ввода
+            
             const searchInput = document.getElementById('searchInput');
             searchInput.addEventListener('keydown', handleEnter);
         });

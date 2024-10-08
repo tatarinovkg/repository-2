@@ -264,12 +264,12 @@
                     classes.forEach(classItem => {
                         const classDiv = document.createElement('div');
                         classDiv.className = 'class-item';
-                        classDiv.innerHTML = `
+                        classDiv.innerHTML = 
                             <h2>ClassId: ${classItem.classID}</h2>
                             <p><strong>Никнейм:</strong> ${classItem.nickname}</p>
                             <p><strong>Класс:</strong> ${classItem.class}</p>
                             <button class="details-button" onclick="showDetails('${classItem.classID}')">Подробнее</button>
-                        `;
+                        ;
                         classesList.appendChild(classDiv);
                     });
                 }
@@ -304,14 +304,14 @@
                     .then(data => {
                         if (data.found) {
                             const classInfo = data.data;
-                            searchResult.innerHTML = `
+                            searchResult.innerHTML = 
                                 <div class="search-item">
                                     <h2>ClassId: ${classInfo.classID}</h2>
                                     <p><strong>Никнейм:</strong> ${classInfo.nickname}</p>
                                     <p><strong>Класс:</strong> ${classInfo.class}</p>
                                     <button class="details-button" onclick="showDetails('${classInfo.classID}')">Подробнее</button>
                                 </div>
-                            `;
+                            ;
                         } else {
                             searchResult.innerHTML = '<p class="search-class-alerts">Класс не найден.</p>';
                         }
@@ -340,14 +340,14 @@
                     if (data.found) {
                         const classInfo = data.data;
                         const modalBody = document.getElementById('modalBody');
-                        modalBody.innerHTML = `
+                        modalBody.innerHTML = 
                 <p><strong>ClassId:</strong> ${classInfo.classID}</p>
                 <p><strong>Класс:</strong> ${classInfo.class}</p>
                 <p><strong>Школа:</strong> ${classInfo.school}</p>
                 <p><strong>Город:</strong> ${classInfo.city}</p>
                 <p><strong>Никнейм:</strong> ${classInfo.nickname}</p>
                 <button class="join-button" onclick="joinClass('${classInfo.class}', '${classInfo.school}', '${classInfo.city}', '${classInfo.nickname}', '${classInfo.classID}')">Вступить</button>
-            `;
+            ;
                         const modal = document.getElementById('detailsModal');
                         modal.style.display = 'flex';
                         modal.classList.add('show');
@@ -393,34 +393,13 @@
             }
         }
 
-        export function isTelegramWebApp() {
-            // @ts-ignore
-            return typeof TelegramWebviewProxy !== 'undefined';
-        }
-        
-        if (isTelegramWebApp()) {
-            console.log("User is using Telegram Web App or in-app browser.");
-            // Здесь можете продолжить инициализацию вашего приложения
+        document.addEventListener('DOMContentLoaded', function() {
             fetchClasses();
+
+            // Добавляем обработчик события keydown к полю ввода
             const searchInput = document.getElementById('searchInput');
             searchInput.addEventListener('keydown', handleEnter);
-        } else {
-            console.log("User is using a regular browser.");
-            displayError(); // Отобразить сообщение об ошибке
-        }
-        
-        // Функция для отображения ошибки
-        function displayError() {
-            document.body.innerHTML = `
-                <div style="text-align: center; margin-top: 50px;">
-                    <h2>Error</h2>
-                    <p>This web application is only accessible through the Telegram bot <a href="https://t.me/tatarinovkgBot" target="_blank">@tatarinovkgBot</a>.</p>
-                    <p>The bot helps students conveniently track homework, associated files, and important announcements.</p>
-                </div>
-            `;
-            document.body.style.backgroundColor = '#fff';
-            document.body.style.color = '#333';
-        }
+        });
     </script>
 </head>
 <body>

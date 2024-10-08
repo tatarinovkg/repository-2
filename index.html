@@ -236,7 +236,7 @@
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
-        
+
         tg.MainButton.setText("Закрыть приложение");
         tg.MainButton.show();
 
@@ -264,12 +264,12 @@
                     classes.forEach(classItem => {
                         const classDiv = document.createElement('div');
                         classDiv.className = 'class-item';
-                        classDiv.innerHTML = 
+                        classDiv.innerHTML = `
                             <h2>ClassId: ${classItem.classID}</h2>
                             <p><strong>Никнейм:</strong> ${classItem.nickname}</p>
                             <p><strong>Класс:</strong> ${classItem.class}</p>
                             <button class="details-button" onclick="showDetails('${classItem.classID}')">Подробнее</button>
-                        ;
+                        `;
                         classesList.appendChild(classDiv);
                     });
                 }
@@ -304,14 +304,14 @@
                     .then(data => {
                         if (data.found) {
                             const classInfo = data.data;
-                            searchResult.innerHTML = 
+                            searchResult.innerHTML = `
                                 <div class="search-item">
                                     <h2>ClassId: ${classInfo.classID}</h2>
                                     <p><strong>Никнейм:</strong> ${classInfo.nickname}</p>
                                     <p><strong>Класс:</strong> ${classInfo.class}</p>
                                     <button class="details-button" onclick="showDetails('${classInfo.classID}')">Подробнее</button>
                                 </div>
-                            ;
+                            `;
                         } else {
                             searchResult.innerHTML = '<p class="search-class-alerts">Класс не найден.</p>';
                         }
@@ -340,14 +340,14 @@
                     if (data.found) {
                         const classInfo = data.data;
                         const modalBody = document.getElementById('modalBody');
-                        modalBody.innerHTML = 
+                        modalBody.innerHTML = `
                 <p><strong>ClassId:</strong> ${classInfo.classID}</p>
                 <p><strong>Класс:</strong> ${classInfo.class}</p>
                 <p><strong>Школа:</strong> ${classInfo.school}</p>
                 <p><strong>Город:</strong> ${classInfo.city}</p>
                 <p><strong>Никнейм:</strong> ${classInfo.nickname}</p>
                 <button class="join-button" onclick="joinClass('${classInfo.class}', '${classInfo.school}', '${classInfo.city}', '${classInfo.nickname}', '${classInfo.classID}')">Вступить</button>
-            ;
+            `;
                         const modal = document.getElementById('detailsModal');
                         modal.style.display = 'flex';
                         modal.classList.add('show');

@@ -237,6 +237,8 @@
         let tg = window.Telegram.WebApp;
         tg.expand();
 
+        let userId = tg.initDataUnsafe.user.id;
+        
         tg.MainButton.setText("Закрыть приложение");
         tg.MainButton.show();
 
